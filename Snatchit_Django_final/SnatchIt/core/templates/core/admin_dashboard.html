@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load group_filters %}
+
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">Admin Dashboard</h2>
+
+  <!-- Add Product Buttons -->
+  <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+    <a href="{% url 'products:add_product' 'men' %}" class="btn btn-outline-primary">Add Men's Product</a>
+    <a href="{% url 'products:add_product' 'women' %}" class="btn btn-outline-primary">Add Women's Product</a>
+    <a href="{% url 'products:add_product' 'kids' %}" class="btn btn-outline-primary">Add Kids' Product</a>
+    <a href="{% url 'products:add_product' 'home' %}" class="btn btn-outline-primary">Add Home & Living</a>
+    <a href="{% url 'products:add_product' 'shoes' %}" class="btn btn-outline-primary">Add Shoes</a>
+  </div>
+
+  <!-- Product List -->
+  <div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>Image</th>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Created At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
+        <tr>
+          <td><img src="{{ product.image.url }}" width="60" class="img-thumbnail"></td>
+          <td>{{ product.title }}</td>
+          <td class="text-capitalize">{{ product.category }}</td>
+          <td>₹{{ product.price }}</td>
+          <td>{{ product.stock }}</td>
+          <td>{{ product.created_at|date:"Y-m-d" }}</td>
+          <td>
+            <a href="{% url 'products:edit_product' product.pk %}" class="btn btn-sm btn-outline-warning">Edit</a>
+            <a href="{% url 'products:delete_product' product.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="7" class="text-center">No products found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

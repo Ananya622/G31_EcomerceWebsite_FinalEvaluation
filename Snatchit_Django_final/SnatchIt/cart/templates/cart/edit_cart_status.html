@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Edit Cart Status</h2>
+<form method="POST">
+    {% csrf_token %}
+    <label for="status">Status:</label>
+    <select name="status" class="form-select">
+        <option value="Pending" {% if cart.status == 'Pending' %}selected{% endif %}>Pending</option>
+        <option value="Shipped" {% if cart.status == 'Shipped' %}selected{% endif %}>Shipped</option>
+        <option value="Delivered" {% if cart.status == 'Delivered' %}selected{% endif %}>Delivered</option>
+    </select>
+    <br>
+    <button type="submit" class="btn btn-success">Update</button>
+</form>
+{% endblock %}
