@@ -1,0 +1,24 @@
+{% extends 'home_base.html' %}
+
+{% block title_block %}
+    Order Confirmation
+{% endblock title_block %}
+
+{% block main_block %}
+    <h1 class="text-center">Your Orders</h1>
+
+    {% if orders %}
+        <ul>
+        {% for order in orders %}
+            <li>
+                <strong>Product:</strong> {{ order.product.name }} <br>
+                <strong>Status:</strong> {{ order.status }} <br>
+                <strong>Quantity:</strong> {{ order.quantity }} <br>
+                <strong>Total:</strong> Rs. {{ order.product.price * order.quantity }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have no orders yet.</p>
+    {% endif %}
+{% endblock %}

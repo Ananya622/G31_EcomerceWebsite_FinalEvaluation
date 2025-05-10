@@ -1,0 +1,179 @@
+{% extends 'home_base.html' %}
+{% block main_block %}
+
+<div class="container">
+    <div class="header">
+        <div class="title">SNEAKERS</div>
+    </div>
+
+    {% if current_user.role == 'admin' %}
+        <!-- Admin Section: Form to Add Products -->
+        <form method="POST" action="{{ url_for('add_product') }}" enctype="multipart/form-data">
+            <div class="admin-form">
+                <h2>Add New Product</h2>
+                <div class="form-group">
+                    <label for="name">Product Name</label>
+                    <input type="text" name="name" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Product Description</label>
+                    <textarea name="description" id="description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" name="price" id="price" step="0.01" required>
+                </div>
+                <div class="mb-3">
+                    <label for="image_url" class="form-label">Product Image URL</label>
+                    <input type="text" class="form-control" id="image_url" name="image_url" required>
+                </div>
+                <button type="submit">Add Product</button>
+            </div>
+        </form>
+
+        <!-- Product Table: List of All Products -->
+        <div class="product-table">
+            <h2>Product List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Product Name</th>
+                        <th>Price (Rs.)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>Rs.{{ product.price }}</td>
+                        <td>
+                            <!-- Edit Button: Redirect to Update Product Page -->
+                            <a href="{{ url_for('update_product', product_id=product.id) }}" class="btn btn-warning">Edit</a>
+                            
+                            <!-- Delete Button: Perform Delete Action -->
+                            <form method="POST" action="{{ url_for('delete_product', product_id=product.id) }}" style="display:inline;">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    {% else %}
+        <!-- Regular User Section: Display Products with Add to Cart Button -->
+        <div class="listProduct">
+            {% for product in products %}
+            <div class="item">
+                <img src="{{ product.image_url }}" alt="{{ product.name }}">
+                <h2>{{ product.name }}</h2>
+                <div class="price">Rs.{{ product.price }}</div>
+                <form method="POST" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+                    <button type="submit" class="addCart">Add to Cart</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
+    body{
+        font-family: "Fredoka", serif;
+        margin: 0;
+    }
+
+    .container{
+        width: 900px;
+        max-width: 90vw;
+        margin: auto;
+        text-align: center;
+        padding-top: 10px;
+        transition: transform .5s;
+    }
+
+    .header .title {
+        text-align: center;
+        font-weight: 800;
+        font-size: 50px;
+    }
+
+    .listProduct .item img{
+        width: 90%;
+        /* filter: drop-shadow(0 50px 20px #0009); */
+
+        margin-bottom: 30px;
+    }
+
+    .listProduct{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+        margin-bottom: 20px;
+    }
+
+    .listProduct .item{
+        background-color: #eeeee6;
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .listProduct .item h2{
+        font-weight: 500;
+        font-size: large;
+    }
+
+    .listProduct .item .price{
+        letter-spacing: 7px;
+        font-size: small;
+    }
+
+    .listProduct .item button{
+        background-color: #353432;
+        cursor: pointer;
+        color: #eee;
+        padding: 5px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        border: none;
+    }
+
+    .admin-form {
+        background-color: #f4f4f4;
+        padding: 30px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .admin-form .form-group {
+        margin-bottom: 15px;
+    }
+
+    .admin-form label {
+        display: block;
+        font-weight: bold;
+    }
+
+    .admin-form input {
+        width: 100%;
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .admin-form button {
+        background-color: #353432;
+        color: #eee;
+        padding: 10px 15px;
+        border-radius: 10px;
+        border: none;
+    }
+</style>
+
+{% endblock %}
