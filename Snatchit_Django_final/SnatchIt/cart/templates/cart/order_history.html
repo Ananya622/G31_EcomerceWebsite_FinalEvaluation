@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .order-card {
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        border: none;
+    }
+    .order-badge {
+        font-size: 0.9rem;
+        padding: 4px 12px;
+        border-radius: 50px;
+    }
+    .status-pending { background-color: #ffe08a; color: #856404; }
+    .status-delivered { background-color: #d4edda; color: #155724; }
+    .status-shipped { background-color: #cce5ff; color: #004085; }
+    .status-cancelled { background-color: #f8d7da; color: #721c24; }
+    .product-image {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-right: 15px;
+    }
+</style>
+
+<div class="container my-5">
+    <h2 class="mb-4">🧾 Your Orders</h2>
+
+   {% if orders %}
+        {% for order in orders %}
+        <div class="card order-card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center bg-light">
+                <div>
+                    <strong>Order ID:</strong> #{{ order.id }}<br>
+                    <small class="text-muted">Placed on {{ order.created_at|date:"F j, Y, g:i a" }}</small>
+                </div>
+                <div>
+                    {% if order.status == "Pending" %}
+                        <span class="order-badge status-pending">Pending</span>
+                    {% elif order.status == "Shipped" %}
+                        <span class="order-badge status-shipped">Shipped</span>
+                    {% elif order.status == "Delivered" %}
+                        <span class="order-badge status-delivered">Delivered</span>
+                    {% elif order.status == "Cancelled" %}
+                        <span class="order-badge status-cancelled">Cancelled</span>
+                    {% else %}
+                        <span class="order-badge bg-secondary text-white">{{ order.status }}</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <ul class="list-group list-group-flush">
+                {% for item in order.items.all %}
+                <li class="list-group-item d-flex align-items-center">
+                    <img src="{{ item.product.image.url }}" alt="{{ item.product.title }}" class="product-image">
+                    <div class="flex-grow-1">
+                        <strong>{{ item.product.title }}</strong><br>
+                        Quantity: {{ item.quantity }} × ₹{{ item.price|floatformat:2 }}
+                    </div>
+                    <div class="text-end fw-bold">₹{{ item.total_price|floatformat:2 }}</div>
+                </li>
+                {% endfor %}
+            </ul>
+            <div class="card-footer text-end bg-light">
+                <strong>Total: ₹{{ order.total|floatformat:2 }}</strong><br>
+                <small>Address: {{ order.address }}</small><br>
+                <small>Payment Method: {{ order.payment_method }}</small>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-muted">You have no previous orders yet.</p>
+    {% endif %}
+
+</div>
+{% endblock %}

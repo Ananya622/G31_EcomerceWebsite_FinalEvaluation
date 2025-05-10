@@ -1,0 +1,16 @@
+# Python
+*.pyc
+*.pyo
+__pycache__/
+venv/
+.env
+
+# Flask-specific
+instance/
+.flaskenv
+
+# Django-specific
+db.sqlite3
+media/
+static/
+.env
