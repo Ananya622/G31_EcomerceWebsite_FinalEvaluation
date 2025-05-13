@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - SnatchIt</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a89dc;
+            --secondary-color: #5d9cec;
+            --accent-color: #3bafda;
+            --text-color: #2c3e50;
+            --light-gray: #f5f7fa;
+            --medium-gray: #e9ecef;
+            --dark-gray: #6c757d;
+            --blue-white: #f0f5ff;
+        }
+        body {
+        /* background: linear-gradient(135deg, #e6f0ff 0%, #ffffff 100%); */
+        background:linear-gradient(135deg, #FFDEE9, #B5FFFC);
+        font-family: 'Montserrat', sans-serif;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-color);
+        line-height: 1.4;
+        letter-spacing: 0.2px;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+    }
+
+    .register-container {
+        width: 1000px;
+        max-width: 95%;
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(74, 137, 220, 0.15), 0 5px 15px rgba(0,0,0,0.07);
+        display: flex;
+        flex-direction: row;
+        height: calc(100vh - 40px);
+        max-height: 680px;
+    }
+
+    .register-sidebar {
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        color: white;
+        width: 33%;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .sidebar-content {
+        max-width: 280px;
+    }
+
+    .form-title {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        letter-spacing: 0.5px;
+    }
+
+    .form-subtitle {
+        font-size: 15px;
+        opacity: 0.9;
+        font-weight: 300;
+        margin-bottom: 25px;
+        line-height: 1.5;
+    }
+
+    .register-body {
+        width: 67%;
+        padding: 20px 30px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--medium-gray) transparent;
+    }
+
+    .register-body::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .register-body::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .register-body::-webkit-scrollbar-thumb {
+        background-color: var(--medium-gray);
+        border-radius: 6px;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .form-group {
+        margin-bottom: 12px;
+    }
+
+    .form-group.full-width {
+        grid-column: span 2;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 3px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .form-control, .form-select {
+        border-radius: 6px;
+        padding: 8px 12px;
+        border: 1px solid var(--medium-gray);
+        transition: all 0.3s ease;
+        font-size: 13px;
+        background-color: var(--blue-white);
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.15rem rgba(74, 137, 220, 0.15);
+        background-color: white;
+    }
+
+    textarea.form-control {
+        height: 60px;
+        resize: none;
+    }
+
+    .btn {
+        border-radius: 6px;
+        padding: 10px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        font-size: 13px;
+    }
+
+    .btn-primary {
+        background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+        border: none;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+        background: linear-gradient(to right, var(--accent-color), var(--primary-color));
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(74, 137, 220, 0.3);
+    }
+
+    .btn-primary:disabled {
+        background: linear-gradient(to right, #a0a8d0, #89d2e0);
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+
+    .btn-light {
+        background: white;
+        border: 1px solid var(--medium-gray);
+        color: var(--text-color);
+    }
+
+    .btn-light:hover {
+        background: var(--light-gray);
+        border-color: var(--dark-gray);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .avatar-section {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .avatar-circle {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background-color: var(--light-gray);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        color: white;
+        overflow: hidden;
+        position: relative;
+        border: 3px solid white;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a89dc'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E");
+        background-size: 60%;
+        background-position: center;
+        background-repeat: no-repeat;
+        flex-shrink: 0;
+    }
+
+    .avatar-circle:hover {
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        transform: scale(1.03);
+    }
+
+    .avatar-text {
+        margin-left: 15px;
+        flex-grow: 1;
+    }
+
+    .avatar-text h4 {
+        font-size: 14px;
+        margin-bottom: 5px;
+        font-weight: 600;
+    }
+
+    .avatar-text p {
+        font-size: 12px;
+        color: var(--dark-gray);
+        margin-bottom: 0;
+    }
+
+    .avatar-upload-icon {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(74, 137, 220, 0.7);
+        color: white;
+        padding: 2px 0;
+        font-size: 9px;
+        text-align: center;
+    }
+
+    .file-input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .password-container {
+        position: relative;
+    }
+
+    .password-toggle {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--dark-gray);
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .strength-bar {
+        height: 3px;
+        margin-top: 5px;
+        border-radius: 1.5px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .form-text {
+        font-size: 11px;
+        color: var(--dark-gray);
+        margin-top: 3px;
+    }
+
+    .requirement {
+        display: inline-block;
+        margin-right: 8px;
+        margin-top: 5px;
+        font-size: 10px;
+        border-radius: 12px;
+        padding: 1px 6px;
+        transition: all 0.3s ease;
+    }
+
+    .requirement.invalid {
+        background-color: rgba(245, 54, 92, 0.1);
+        color: #f5365c;
+    }
+
+    .requirement.valid {
+        background-color: rgba(45, 206, 137, 0.1);
+        color: #2dce89;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .action-buttons .btn {
+        flex: 1;
+    }
+
+    .social-login {
+        margin-top: 15px;
+        padding-top: 10px;
+        border-top: 1px solid var(--medium-gray);
+    }
+
+    .btn-google {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 8px;
+        font-size: 13px;
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+    }
+
+    .google-icon {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .popup.show {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .popup-content {
+        background-color: white;
+        border-radius: 8px;
+        padding: 25px;
+        max-width: 380px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        transform: translateY(-20px);
+        transition: all 0.3s ease;
+    }
+    
+    .popup.show .popup-content {
+        transform: translateY(0);
+    }
+    
+    .popup-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        color: var(--text-color);
+    }
+    
+    .popup-message {
+        margin-bottom: 20px;
+        color: var(--dark-gray);
+    }
+    
+    .popup-btn {
+        background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 20px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .popup-btn:hover {
+        background: linear-gradient(to right, var(--accent-color), var(--primary-color));
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(74, 137, 220, 0.3);
+    }
+
+    .form-check-input:checked {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    /* Special scrolling effect for small height screens */
+    @media (max-height: 680px) {
+        .register-container {
+            height: 95vh;
+        }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+        .register-container {
+            flex-direction: column;
+            height: auto;
+            max-height: none;
+        }
+        
+        .register-sidebar {
+            width: 100%;
+            padding: 20px;
+        }
+        
+        .register-body {
+            width: 100%;
+            max-height: 500px;
+        }
+
+        .sidebar-content {
+            max-width: 100%;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .form-group.full-width {
+            grid-column: span 1;
+        }
+        
+        .action-buttons {
+            flex-direction: column;
+        }
+
+        .register-body {
+            padding: 15px;
+        }
+    }
+</style>
+</head>
+<body>
+<div class="register-container">
+    <div class="register-sidebar">
+        <div class="sidebar-content">
+            <h2 class="form-title">Join SnatchIt Today</h2>
+            <p class="form-subtitle">Create an account to get started with all our features and find amazing deals</p>
+        </div>
+    </div>
+    <div class="register-body">
+        <form method="POST"  enctype="multipart/form-data" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div class="avatar-section">
+                <div class="avatar-circle avatar-default" id="avatarPreview">
+                    <span id="initialPreview"></span>
+                    <img id="imagePreview" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+                    <div class="avatar-upload-icon">
+                        <i class="fas fa-camera"></i> Upload
+                    </div>
+                    <input type="file" name="profile_picture" class="file-input" id="profilePicture" accept="image/*">
+                </div>
+                <div class="avatar-text">
+                    <h4>Profile Picture</h4>
+                    <p>Upload a photo or we'll use your initials</p>
+                </div>
+            </div>
+    
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="fullName" class="form-label">Full Name</label>
+                    <input type="text" name="full_name" class="form-control" id="fullName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control" id="username" placeholder="Choose a unique username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="your.email@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="tel" name="phone" class="form-control" id="phone" placeholder="Enter your phone number" required minlength="10">
+                </div>
+                
+                <div class="form-group">
+                    <label for="dob" class="form-label">Date of Birth</label>
+                    <input type="date" name="dob" class="form-control" id="dob" required>
+                </div>
+                <div class="form-group">
+                    <label for="gender" class="form-label">Gender</label>
+                    <select name="gender" class="form-select" id="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Non-binary">Non-binary</option>
+                        <option value="Other">Other</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                    </select>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="address" class="form-label">Address</label>
+                    <textarea name="address" class="form-control" id="address" placeholder="Enter your full address" rows="2"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="password-container">
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Create a strong password" required>
+                        <span class="password-toggle" id="passwordToggle">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
+                    <div class="progress strength-bar">
+                        <div class="progress-bar" id="strengthBar" role="progressbar" style="width: 0%"></div>
+                    </div>
+                    <div id="passwordRequirements" class="mt-1">
+                        <span class="requirement invalid" id="req-length"><i class="fas fa-times-circle"></i> 8+</span>
+                        <span class="requirement invalid" id="req-lower"><i class="fas fa-times-circle"></i> a-z</span>
+                        <span class="requirement invalid" id="req-upper"><i class="fas fa-times-circle"></i> A-Z</span>
+                        <span class="requirement invalid" id="req-number"><i class="fas fa-times-circle"></i> 0-9</span>
+                        <span class="requirement invalid" id="req-special"><i class="fas fa-times-circle"></i> !@#$</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <div class="password-container">
+                        <input type="password" name="confirm_password" class="form-control" id="confirmPassword" placeholder="Re-enter your password" required>
+                        <span class="password-toggle" id="confirmPasswordToggle">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
+                    <div id="passwordMatch" class="form-text"></div>
+                </div>
+                
+                <div class="form-group full-width">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                        <label class="form-check-label" for="termsCheck" style="font-size: 12px;">
+                            I agree to the <a href="#" class="text-decoration-none">Terms of Service</a> and <a href="#" class="text-decoration-none">Privacy Policy</a>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button type="button" class="btn btn-light" id="loginBtn">Log In</button>
+                <button type="submit" class="btn btn-primary" id="registerBtn" disabled>Create Account</button>
+            </div>
+            
+            <div class="social-login">
+                <p class="text-center mb-2" style="font-size: 12px;">Or sign up with</p>
+                <button type="button" class="btn btn-light btn-google">
+                    <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                        <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path>
+                        <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path>
+                        <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path>
+                        <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
+                    </svg>
+                    Continue with Google
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Age Verification Popup -->
+<div class="popup" id="agePopup">
+    <div class="popup-content">
+        <div class="popup-title">Age Verification</div>
+        <p class="popup-message">You must be at least 13 years old to register for SnatchIt.</p>
+        <button class="popup-btn" id="ageConfirmBtn">I Understand</button>
+    </div>
+</div>
+
+
+<script>
+    // Profile picture handling
+    const profilePicture = document.getElementById('profilePicture');
+    const imagePreview = document.getElementById('imagePreview');
+    const avatarPreview = document.getElementById('avatarPreview');
+    const initialPreview = document.getElementById('initialPreview');
+    const fullNameInput = document.getElementById('fullName');
+    
+    // Set default avatar with initials
+    function updateInitialAvatar() {
+        const fullName = fullNameInput.value.trim();
+        if (fullName) {
+            const initial = fullName.charAt(0).toUpperCase();
+            initialPreview.textContent = initial;
+        } else {
+            initialPreview.textContent = '';
+        }
+    }
+    
+    fullNameInput.addEventListener('input', updateInitialAvatar);
+    
+    profilePicture.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            // Validate file size (max 2MB)
+            if (file.size > 2 * 1024 * 1024) {
+                alert('File size should not exceed 2MB');
+                this.value = '';
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.style.display = 'block';
+                initialPreview.style.display = 'none';
+                imagePreview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.style.display = 'none';
+            initialPreview.style.display = 'block';
+            updateInitialAvatar();
+        }
+    });
+    
+    // Password visibility toggle
+    const passwordToggle = document.getElementById('passwordToggle');
+    const confirmPasswordToggle = document.getElementById('confirmPasswordToggle');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+    
+    passwordToggle.addEventListener('click', function() {
+        togglePasswordVisibility(password, this);
+    });
+    
+    confirmPasswordToggle.addEventListener('click', function() {
+        togglePasswordVisibility(confirmPassword, this);
+    });
+    
+    function togglePasswordVisibility(inputField, toggleButton) {
+        const type = inputField.getAttribute('type') === 'password' ? 'text' : 'password';
+        inputField.setAttribute('type', type);
+        toggleButton.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+    }
+    
+    // Password strength meter and requirements
+    const strengthBar = document.getElementById('strengthBar');
+    const registerBtn = document.getElementById('registerBtn');
+    const termsCheck = document.getElementById('termsCheck');
+    
+    // Password requirement elements
+    const reqLength = document.getElementById('req-length');
+    const reqLower = document.getElementById('req-lower');
+    const reqUpper = document.getElementById('req-upper');
+    const reqNumber = document.getElementById('req-number');
+    const reqSpecial = document.getElementById('req-special');
+    
+    // Check password strength and update UI
+    password.addEventListener('input', function() {
+        const val = password.value;
+        let strength = 0;
+        
+        // Check each requirement
+        const hasLowercase = /[a-z]/.test(val);
+        updateRequirement(reqLower, hasLowercase);
+        if (hasLowercase) strength += 1;
+        
+        const hasUppercase = /[A-Z]/.test(val);
+        updateRequirement(reqUpper, hasUppercase);
+        if (hasUppercase) strength += 1;
+        
+        const hasNumber = /[0-9]/.test(val);
+        updateRequirement(reqNumber, hasNumber);
+        if (hasNumber) strength += 1;
+        
+        const hasSpecial = /[$@#&!*()^%]/.test(val);
+        updateRequirement(reqSpecial, hasSpecial);
+        if (hasSpecial) strength += 1;
+        
+        const isLongEnough = val.length >= 8;
+        updateRequirement(reqLength, isLongEnough);
+        if (isLongEnough) strength += 1;
+        
+        // Update strength bar
+        const percent = strength * 20;
+        strengthBar.style.width = percent + '%';
+        
+        if (percent < 40) {
+            strengthBar.className = 'progress-bar bg-danger';
+        } else if (percent < 60) {
+            strengthBar.className = 'progress-bar bg-warning';
+        } else if (percent < 80) {
+            strengthBar.className = 'progress-bar bg-info';
+        } else {
+            strengthBar.className = 'progress-bar bg-success';
+        }
+        
+        checkFormValidity();
+    });
+    
+    function updateRequirement(element, isValid) {
+        if (isValid) {
+            element.classList.remove('invalid');
+            element.classList.add('valid');
+            element.innerHTML = '<i class="fas fa-check-circle"></i> ' + element.textContent.trim().replace(/^[✓✗]\s*/, '');
+        } else {
+            element.classList.remove('valid');
+            element.classList.add('invalid');
+            element.innerHTML = '<i class="fas fa-times-circle"></i> ' + element.textContent.trim().replace(/^[✓✗]\s*/, '');
+        }
+    }
+    
+    // Password match validation
+    confirmPassword.addEventListener('input', function() {
+        const passwordMatch = document.getElementById('passwordMatch');
+        if (password.value !== confirmPassword.value) {
+            passwordMatch.innerHTML = 'Passwords do not match';
+            passwordMatch.style.color = '#dc3545';
+        } else {
+            passwordMatch.innerHTML = 'Passwords match';
+            passwordMatch.style.color = '#2dce89';
+        }
+        
+        checkFormValidity();
+    });
+    
+    // Terms checkbox validation
+    termsCheck.addEventListener('change', function() {
+        checkFormValidity();
+    });
+    
+    // Check overall form validity to enable/disable register button
+    function checkFormValidity() {
+        // Check password strength
+        const val = password.value;
+        const hasLowercase = /[a-z]/.test(val);
+        const hasUppercase = /[A-Z]/.test(val);
+        const hasNumber = /[0-9]/.test(val);
+        const hasSpecial = /[$@#&!*()^%]/.test(val);
+        const isLongEnough = val.length >= 8;
+        
+        const isStrongPassword = hasLowercase && hasUppercase && hasNumber && hasSpecial && isLongEnough;
+        const passwordsMatch = password.value === confirmPassword.value && password.value !== '';
+        const termsChecked = termsCheck.checked;
+        
+        registerBtn.disabled = !(isStrongPassword && passwordsMatch && termsChecked);
+    }
+    
+    // Date of birth validation with popup
+    const dobInput = document.getElementById('dob');
+    const agePopup = document.getElementById('agePopup');
+    const ageConfirmBtn = document.getElementById('ageConfirmBtn');
+    
+    dobInput.addEventListener('change', function() {
+        const today = new Date();
+        const selectedDate = new Date(this.value);
+        const minDate = new Date();
+        minDate.setFullYear(today.getFullYear() - 13);
+        
+        // Check if future date
+        if (selectedDate > today) {
+            this.value = '';
+            return;
+        }
+        
+        // Check if user is at least 13 years old
+        if (selectedDate > minDate) {
+            this.value = '';
+            showAgePopup();
+            return;
+        }
+    });
+    
+    // Show age verification popup
+    function showAgePopup() {
+        agePopup.classList.add('show');
+    }
+    
+    // Hide age verification popup
+    ageConfirmBtn.addEventListener('click', function() {
+        agePopup.classList.remove('show');
+    });
+    
+    // Set maximum date for date of birth (today)
+    const todayFormatted = new Date().toISOString().split('T')[0];
+    dobInput.setAttribute('max', todayFormatted);
+    
+    // Login button redirect
+    document.getElementById('loginBtn').addEventListener('click', function() {
+        window.location.href = "{% url 'login' %}";
+    });
+</script>
+</body>
+</html>
