@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .edit-profile-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .edit-profile-container h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .profile-image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .avatar-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border: 3px solid #e0e0e0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            background: linear-gradient(135deg, #d4e1f2, #a6c1ee);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 40px;
+            font-weight: 600;
+        }
+
+        .avatar-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 12px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .avatar-circle:hover .avatar-overlay {
+            opacity: 1;
+        }
+
+        .file-input {
+            text-align: center;
+        }
+
+        .file-input input[type="file"] {
+            display: none;
+        }
+
+        .file-input label {
+            padding: 8px 15px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        .file-input label:hover {
+            background-color: #0056b3;
+        }
+
+        .file-input p {
+            margin-top: 5px;
+            color: #666;
+            font-size: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        button.btn {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        button.btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="edit-profile-container">
+    <h2>Edit Profile</h2>
+    
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="profile-image-container">
+            <div class="avatar-circle">
+                {% if profile.profile_image %}
+                    <img src="{{ profile.profile_image.url }}" alt="Profile Image">
+                {% else %}
+                    {{ user.first_name|slice:":1" }}
+                {% endif %}
+                <div class="avatar-overlay">Change Photo</div>
+            </div>
+            
+            <div class="file-input">
+                <label for="profile_image_upload">Change Profile Photo</label>
+                <input id="profile_image_upload" type="file" name="profile_image" accept="image/*">
+                <p><small>Recommended: Square image (1:1 ratio)</small></p>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="first_name">Full Name</label>
+            <input type="text" name="first_name" value="{{ user.first_name }}" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" value="{{ user.email }}" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" name="phone" value="{{ profile.phone }}" required>
+        </div>
+        <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="date" name="dob" value="{{ profile.dob }}" required>
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <select name="gender" required>
+                <option value="Male" {% if profile.gender == 'Male' %}selected{% endif %}>Male</option>
+                <option value="Female" {% if profile.gender == 'Female' %}selected{% endif %}>Female</option>
+                <option value="Other" {% if profile.gender == 'Other' %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="address">Address</label>
+            <textarea name="address" required>{{ profile.address }}</textarea>
+        </div>
+        
+        <button type="submit" class="btn">Save Changes</button>
+    </form>
+</div>
+
+<script>
+    // JavaScript to trigger file input when clicking on avatar
+    document.querySelector('.avatar-overlay').addEventListener('click', function() {
+        document.getElementById('profile_image_upload').click();
+    });
+    
+    // Show filename when selected
+    document.getElementById('profile_image_upload').addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            // Preview the image
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var img = document.querySelector('.avatar-circle img');
+                if (img) {
+                    img.src = e.target.result;
+                } else {
+                    // If no img exists, create one
+                    var newImg = document.createElement('img');
+                    newImg.src = e.target.result;
+                    newImg.alt = "Profile Image";
+                    
+                    // Remove text content
+                    var avatarCircle = document.querySelector('.avatar-circle');
+                    avatarCircle.textContent = '';
+                    
+                    // Add the image and overlay
+                    avatarCircle.appendChild(newImg);
+                    
+                    // Make sure overlay stays on top
+                    var overlay = document.querySelector('.avatar-overlay');
+                    if (overlay) {
+                        avatarCircle.appendChild(overlay);
+                    }
+                }
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+</script>
+
+</body>
+</html>
