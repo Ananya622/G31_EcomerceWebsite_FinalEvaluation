@@ -32,12 +32,6 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Set up environment variables (if applicable)
-# cp .env.example .env
-# Edit the .env file with your configuration
-
-# Initialize the database (if needed)
-flask db upgrade  # Or follow specific setup instructions in Flask project
 
 # Start the Flask API server
 flask run --port=5000
@@ -54,15 +48,14 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Set up environment variables (if applicable)
-# cp .env.example .env
-# Edit the .env file as needed
-
 # Run migrations
 python manage.py migrate
 
 # Create a superuser (if needed)
 python manage.py createsuperuser
+
+# If you are using this as a normal user then just run->
+python manage.py runserver
 
 # Start the Django development server
 python manage.py runserver
