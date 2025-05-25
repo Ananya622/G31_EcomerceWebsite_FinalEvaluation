@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Profile</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f3f6fb;
+  color: #333;
+}
+
+.profile-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: auto;
+  gap: 30px;
+}
+
+.profile-sidebar {
+  width: 280px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.avatar-circle {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d4e1f2, #a6c1ee);
+  color: #fff;
+  font-size: 40px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.avatar-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-name {
+  font-size: 22px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 4px;
+}
+
+.profile-username {
+  color: #7f8c8d;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.profile-nav a {
+  display: block;
+  padding: 10px 15px;
+  margin: 8px 0;
+  text-decoration: none;
+  color: #34495e;
+  background-color: #ecf3fc;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.profile-nav a:hover {
+  background-color: #007bff;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.2);
+}
+
+.profile-main {
+  flex: 1;
+  min-width: 300px;
+}
+
+.profile-details {
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.profile-details h2 {
+  font-size: 28px;
+  margin-bottom: 24px;
+  color: #2c3e50;
+  border-bottom: 2px solid #e0e6ed;
+  padding-bottom: 10px;
+}
+
+.profile-row {
+  font-size: 17px;
+  margin-bottom: 18px;
+  color: #555;
+}
+
+.profile-row strong {
+  color: #2c3e50;
+  display: inline-block;
+  min-width: 140px;
+}
+
+  </style>
+</head>
+<body>
+<div class="profile-container">
+  <div class="profile-sidebar">
+    <div class="avatar-circle">
+      {% if profile.profile_image %}
+        <img src="{{ profile.profile_image.url }}" alt="Profile Image">
+      {% else %}
+        {{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}
+      {% endif %}
+    </div>
+    <div class="profile-name">{{ user.first_name }}</div>
+    <div class="profile-username">@{{ user.username }}</div>
+    <div class="profile-nav">
+      <a href="{% url 'profile' %}">Profile</a>
+      <a href="{% url 'edit_profile' %}">Edit Profile</a>
+      <a href="{% url 'home' %}">Home</a>
+      <a href="{% url 'logout' %}">Logout</a>
+    </div>
+  </div>
+
+  <div class="profile-main">
+    <div class="profile-details">
+      <h2>Your Profile</h2>
+      <div class="profile-row">
+        <strong>Full Name:</strong> {{ user.first_name }} {{ user.last_name }}
+      </div>
+      <div class="profile-row">
+        <strong>Email:</strong> {{ user.email }}
+      </div>
+      <div class="profile-row">
+        <strong>Phone:</strong> {{ profile.phone }}
+      </div>
+      <div class="profile-row">
+        <strong>Date of Birth:</strong> {{ profile.dob }}
+      </div>
+      <div class="profile-row">
+        <strong>Gender:</strong> {{ profile.gender }}
+      </div>
+      <div class="profile-row">
+        <strong>Address:</strong> {{ profile.address }}
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

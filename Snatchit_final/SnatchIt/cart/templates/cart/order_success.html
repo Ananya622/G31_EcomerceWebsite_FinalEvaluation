@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5 text-center">
+    <div class="card shadow-lg border-0">
+        <div class="card-body bg-light rounded-lg">
+            <h1 class="text-success mb-4 display-4"><i class="bi bi-check-circle-fill"></i> Order Successful!</h1>
+            <p class="lead mb-4">Thank you for shopping with SnatchIt! Your order has been successfully placed.</p>
+
+            <hr class="my-4">
+
+            <h3 class="text-start mb-3">Order Summary</h3>
+            <ul class="list-group mb-4">
+                {% for item in order.items %}
+                <li class="list-group-item d-flex justify-content-between align-items-center shadow-sm">
+                    <div class="d-flex">
+                        <img src="{{ item.image }}" alt="{{ item.title }}" class="img-thumbnail" style="width: 60px; height: 60px; object-fit: cover; margin-right: 15px;">
+                        <div>
+                            <strong>{{ item.title }}</strong><br>
+                            Quantity: {{ item.quantity }} × ₹{{ item.price }}
+                        </div>
+                    </div>
+                    <span class="fw-bold text-success">₹{{ item.total_price }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <h4 class="text-end">Total Paid: ₹{{ order.total }}</h4>
+            </div>
+
+            <div class="text-center">
+                <a href="{% url 'home' %}" class="btn btn-lg btn-outline-success px-5 py-3 mt-4 fw-bold rounded-3 shadow-sm" style="text-transform: uppercase; border-radius: 30px;">
+                    Continue Shopping
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Additional Visual Enhancements -->
+<div class="container mt-5 text-center">
+    <div class="row">
+        <div class="col-md-4">
+            <i class="bi bi-truck text-primary" style="font-size: 50px;"></i>
+            <h4 class="mt-3">Fast Delivery</h4>
+            <p>We ship all orders quickly and efficiently.</p>
+        </div>
+        <div class="col-md-4">
+            <i class="bi bi-shield-lock text-info" style="font-size: 50px;"></i>
+            <h4 class="mt-3">Secure Payments</h4>
+            <p>Your payment information is safe with us.</p>
+        </div>
+        <div class="col-md-4">
+            <i class="bi bi-arrow-repeat text-warning" style="font-size: 50px;"></i>
+            <h4 class="mt-3">Easy Returns</h4>
+            <p>Not happy with your order? Return it hassle-free.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

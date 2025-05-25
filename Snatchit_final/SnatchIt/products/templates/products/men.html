@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load group_filters %}
+
+{% block content %}
+<h2 class="text-center my-4">Men's Products</h2>
+
+<div class="container">
+  <!-- Show Add Product button to Admin or Approved Brand -->
+  {% if user.is_authenticated and user|has_group:"Admin" or user|has_group:"Approved Brand" %}
+    <div class="mb-4 text-end">
+      <a href="{% url 'products:add_product' 'men' %}" class="btn btn-success">+ Add New Product</a>
+    </div>
+  {% endif %}
+
+  <div class="row">
+    {% for product in products %}
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+          <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}" style="height: 250px; object-fit: cover;">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ product.title }}</h5>
+            <p class="card-text"><strong>₹{{ product.price }}</strong></p>
+            <p class="card-text text-muted">{{ product.description|truncatewords:15 }}</p>
+            <div class="mt-auto d-flex justify-content-between">
+              <a href="{% url 'products:product_detail' product.pk %}" class="btn btn-sm btn-outline-primary">View</a>
+              
+              {% if user.is_authenticated and user|has_group:"Admin" or user|has_group:"Approved Brand" %}
+                <div class="btn-group">
+                  <a href="{% url 'products:edit_product' product.pk %}" class="btn btn-sm btn-outline-warning">Edit</a>
+                  <a href="{% url 'products:delete_product' product.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                </div>
+              {% else %}
+                <a href="{% url 'cart:add_to_cart' product.pk %}" class="btn btn-sm btn-outline-success">Add to Cart</a>
+              {% endif %} 
+            </div>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12 text-center">
+        <p>No products available in this category.</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
