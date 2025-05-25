@@ -17,7 +17,7 @@ Snatchit_django_final - Contains the main Django application
 Setup and Installation
 Step 1: Clone Both Repositories
 bash# Clone the Flask API repository
-git clone [https://github.com/yourusername/flask_final.git](https://github.com/Ananya622/G31_EcomerceWebsite_FinalEvaluation.git )
+git clone https://github.com/Ananya622/G31_EcomerceWebsite_FinalEvaluation.git
 
 # Clone the Django application repository
 git clone https://github.com/Ananya622/G31_EcomerceWebsite_FinalEvaluation.git
