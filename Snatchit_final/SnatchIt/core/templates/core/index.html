@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Home{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'core/css/index.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<!-- 
+    carasoul -->
+    <div class="strip top car">
+        <span>SnatchIt</span><span>SnatchIt</span><span>SnatchIt</span><span>SnatchIt</span><span>SnatchIt</span><span>SnatchIt</span><span>SnatchIt</span><span>SnatchIt</span><span>SnatchIt</span><span>SnatchIt</span>
+      </div>
+    
+      <div class="carousel car">
+        <div class="carousel-images">
+          <img src="https://assets.ajio.com/cms/AJIO/WEB/D-ABS-KHP-1.0-S1-MainBanners-AJIOMANIA-SALEEXTENTION-15042025.jpg" alt="Slide 1">
+          <img src="https://assets.ajio.com/cms/AJIO/WEB/D-AMS-WHP-1.0-S2-adhoc-P2-freshthissummer-upto35-11042025.jpg" alt="Slide 2">
+          <img src="https://assets.ajio.com/cms/AJIO/WEB/D-NSM-MHP-1.0-S1-MainBanners-AJIOMANIA-SALEEXTENTION-18042025-rev.jpg" alt="Slide 3">
+        </div>
+      </div>
+    
+      <div class="strip bottom car">
+        <span>SnatchIt</span><span>SnatchIt</span><span>SnatchIt</span><span>SnatchIt</span><span>SnatchIt</span><span>SnatchIt</span><span>SnatchIt</span><span>SnatchIt</span><span>SnatchIt</span><span>SnatchIt</span>
+      </div>
+
+
+<!-- explore catagories section
+     -->
+      <div class="explore-body">
+     <h1 class="ex-h1">Explore Categories →</h1>
+     <div class="scroll-arrow left-arrow" onclick="scrollCategories('left')">◀</div>
+     <div class="scroll-arrow right-arrow" onclick="scrollCategories('right')">▶</div>
+     <div class="scroll-container">
+       <div class="category-wrapper" onclick="location.href='home.html'"><div class="category-card"><img src="https://m.media-amazon.com/images/I/319lj2v7pWL._SX300_SY300_QL70_FMwebp_.jpg"></div><div class="category-name">Home & Living</div></div>
+       <div class="category-wrapper" onclick="location.href='men.html'"><div class="category-card"><img src="https://assets.ajio.com/medias/sys_master/root/20250128/3Fzr/6798a4402960820c49412620/-473Wx593H-443060510-navy-MODEL.jpg"></div><div class="category-name">Men</div></div>
+       <div class="category-wrapper" onclick="location.href='women.html'"><div class="category-card"><img src="https://assets.ajio.com/medias/sys_master/root/20250328/HxaQ/67e6d0b47a6cd4182f904e78/-473Wx593H-701391011-black-MODEL.jpg"></div><div class="category-name">Women</div></div>
+       <div class="category-wrapper" onclick="location.href='kids.html'"><div class="category-card"><img src="https://assets.ajio.com/medias/sys_master/root/20240118/Ek2Q/65a8551516fd2c6e6aaea481/-473Wx593H-466990109-white-MODEL.jpg"></div><div class="category-name">Kids</div></div>
+       <div class="category-wrapper" onclick="location.href='mobiles.html'"><div class="category-card"><img src="https://m.media-amazon.com/images/I/31KxpX7Xk7L._SX300_SY300_QL70_FMwebp_.jpg"></div><div class="category-name">Mobiles</div></div>
+       <div class="category-wrapper" onclick="location.href='headphones.html'"><div class="category-card"><img src="https://m.media-amazon.com/images/I/41VFJcUHTvL._SX300_SY300_QL70_FMwebp_.jpg"></div><div class="category-name">Headphones</div></div>
+       <div class="category-wrapper" onclick="location.href='accessories.html'"><div class="category-card"><img src="https://m.media-amazon.com/images/I/41RCVsQkYDL._SX300_SY300_QL70_FMwebp_.jpg"></div><div class="category-name">Accessories</div></div>
+       <div class="category-wrapper" onclick="location.href='shoes.html'"><div class="category-card"><img src="https://images.vegnonveg.com/resized/680X800/11348/dunk-low-cacao-wowpale-ivory-pink-foam-pink-6690d0e8cb967.jpg?format=webp"></div><div class="category-name">Shoes</div></div>
+       <div class="category-wrapper" onclick="location.href='laptops.html'"><div class="category-card"><img src="https://m.media-amazon.com/images/I/41YvjAcEc3L._SY445_SX342_QL70_FMwebp_.jpg"></div><div class="category-name">Laptops</div></div>
+     </div>
+    </div>
+
+    
+
+
+
+
+
+    <!-- moving strip -->
+
+
+        <div class="logo-strip-container strip-body">
+          <div class="logo-strip">
+            <!-- Placeholder for Logos -->
+            <img src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5362a828-0f5b-4d17-a6c5-d0677dc89baa_1000x1000.jpeg" alt="Nike" class="brand-logo">
+            <img src="https://i.pinimg.com/736x/bf/b1/2f/bfb12f9dc4f806be63b57ec481c91ab2.jpg" alt="Adidas" class="brand-logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQreBi5cbZhWg_yC7p-zQGYQFU2rblpaLglxQ&s" alt="Puma" class="brand-logo">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/020/336/300/small/woodland-logo-woodland-icon-free-free-vector.jpg" alt="woodland" class="brand-logo">
+            <img src=" https://static.vecteezy.com/system/resources/previews/023/871/262/non_2x/fila-brand-logo-symbol-white-design-clothes-fashion-illustration-with-black-background-free-vector.jpg"alt="Fila" class="brand-logo">
+            <img src="https://i.pinimg.com/1200x/19/11/88/191188f9506fbf6e947e3131ef530d9c.jpg" alt="Tommy Hilfiger" class="brand-logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_AbjeUA3SbU1gZkfh0jepmsVWXxG1zrXIbg&s" alt="RedTape" class="brand-logo">
+            <img src="https://nextgalleriamalls.com/galleriapunjagutta/wp-content/uploads/2023/04/download-1-1-1.png" alt="Madame" class="brand-logo">
+            <img src="https://i.pinimg.com/736x/68/aa/da/68aada71e3c8a4c244b62606039e9e2f.jpg" alt="Apple" class="brand-logo">
+            <img src="https://static.vecteezy.com/system/resources/previews/020/927/133/non_2x/oppo-brand-logo-phone-symbol-white-design-chinese-mobile-illustration-with-black-background-free-vector.jpg" alt="Oppo" class="brand-logo">
+          </div>
+        </div>
+
+
+
+        <!-- our story section -->
+
+        <section class="about-section">
+            <div class="about-content">
+              <h2 class="about-title">📖 Our Story</h2>
+              <p class="about-text">✨ At SnatchIt, we believe in crafting a shopping experience as charming as a page from your favorite novel. Our journey began with a vision to offer the finest products wrapped in elegance and trust. 💫</p>
+              <p class="about-mission">🌟 Our mission: To inspire, empower, and connect through a curated selection that fits your lifestyle and values. ❤️</p>
+              <p class="about-mission"> "Our story is just beginning, and we want you to be a part of it. Snatch it before it’s too late!" </p>
+            </div>
+          </section>
+          <!-- "You're Still Here" Section -->
+    <section class="still-here">
+        <div>
+            <h1>You're still here!</h1>
+            <p>Steal the trend now with exclusive eCommerce picks. Don't miss out!</p>
+            <button class="shop-now-btn">Shop Now</button>
+        </div>
+        <img src="https://png.pngtree.com/thumb_back/fh260/background/20230712/pngtree-lively-pink-background-for-web-design-and-e-commerce-shopping-cart-image_3836628.jpg" alt="Trendy Products" class="still-here-img">
+    </section>
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script >
+//carasoul
+let currentIndex = 0;
+    const images = document.querySelector('.carousel-images');
+    const totalImages = document.querySelectorAll('.carousel-images img').length;
+
+    function showNextImage() {
+      currentIndex = (currentIndex + 1) % totalImages;
+      images.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    setInterval(showNextImage, 3000);
+
+    // explore catagories section.
+
+    function scrollCategories(direction) {
+      const container = document.querySelector('.scroll-container');
+      container.scrollBy({ left: direction === 'left' ? -300 : 300, behavior: 'smooth' });
+    }
+    
+
+    //moving strip.
+
+     // JavaScript to dynamically clone logos for continuous loop effect
+     const logoStrip = document.querySelector('.logo-strip');
+    const logos = document.querySelectorAll('.brand-logo');
+    
+    // Function to clone logos for the infinite loop
+    const cloneLogos = () => {
+      logos.forEach(logo => {
+        const clonedLogo = logo.cloneNode(true);
+        logoStrip.appendChild(clonedLogo); // Add the clone after the original
+      });
+    };
+
+    // Clone logos once the page has loaded
+    window.onload = () => {
+      cloneLogos();
+    };
+
+</script>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="text-center">All Carts</h2>
+<table class="table table-bordered mt-4">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>User</th>
+            <th>Status</th>
+            <th>Last Updated</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cart in carts %}
+        <tr>
+            <td>{{ cart.id }}</td>
+            <td>{{ cart.user.username }}</td>
+            <td>{{ cart.status }}</td>
+            <td>{{ cart.updated_at }}</td>
+            <td><a href="{% url 'cart:update_cart_status' cart.id %}" class="btn btn-sm btn-primary">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
