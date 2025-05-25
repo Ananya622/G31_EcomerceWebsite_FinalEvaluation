@@ -12,5 +12,5 @@ instance/
  
 # Django 
 db.sqlite3 
-media/ 
-static/ 
+# media/ 
+# static/ 
